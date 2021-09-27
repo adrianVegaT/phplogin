@@ -1,0 +1,12 @@
+CREATE DATABASE phplogin;
+
+USE phplogin;
+
+CREATE TABLE usuarios(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar (25),
+    username varchar (25),
+    email varchar (50),
+    contraseña varchar (300)
+
+)
