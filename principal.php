@@ -86,5 +86,8 @@
                     <?php endif; ?>
         </div>
     </div>
+    <div>
+        <a href="imagen.php">Añadir imagen de perfil</a>
+    </div>
 </body>
 </html>
