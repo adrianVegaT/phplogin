@@ -10,16 +10,36 @@
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $sen->bindParam(':password',$password);
 
+        //verificando si el email esta registrado anteriormente
+        $sql2 = "SELECT COUNT(*) FROM usuario WHERE email=:email";
+        $sen2 = $con->prepare($sql2);
+        $sen2->bindParam(':email',$_POST['email']);
+        $sen2->execute();
+        $results2 = $sen2->fetch(PDO::FETCH_ASSOC);
+
+        //verificando si el nombre de usuario esta ocupado
+        $sql3 = "SELECT COUNT(*) FROM usuario WHERE username=:usuario";
+        $sen3 = $con->prepare($sql3);
+        $sen3->bindParam(':usuario',$_POST['usuario']);
+        $sen3->execute();
+        $results3 = $sen3->fetch(PDO::FETCH_ASSOC);
+
         $message = "";
-        if ($sen->execute()) {
+        
+        if ($results2['COUNT(*)']>0) {
+            $message = "El correo se registro anteriormente, puedes utilizarlo en 'Iniciar sesión'";
             
+            
+        }elseif ($results3['COUNT(*)']>0) {
+            $message = "El usuario no esta disponible, intenta con otro nombre de usuario";
+        } else if ($sen->execute()) {
             $message = "El usuario se creo correctamente, Inicia sesion.";
-            
-        }else {
-            $message = "Hubo un error al crear el usuario, intentalo nuevamente.";
-           
         }
-    }else {
+            
+        
+    
+    
+  } else {
         $message ="Llena todos los campos";
         
     }
