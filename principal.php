@@ -4,7 +4,7 @@
     require 'database.php';
 
     if (isset($_SESSION['user_id'])) {
-        $sql = "SELECT id,nombre,email,username,contraseña FROM usuario WHERE id = :id";
+        $sql = "SELECT id,nombre,email,username,contraseña,imagen FROM usuario WHERE id = :id";
         $sen = $con->prepare($sql);
         $sen ->bindParam(':id', $_SESSION['user_id']);
         
@@ -15,7 +15,14 @@
       if (count($results) > 0) {
         $user = $results;
       }
+
+      if (!empty($results['imagen'])) {
+         
+      }
+
+     
     }
+    
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,12 +45,20 @@
 
                     <h3>Haz iniciado sesion correctamente</h3> <br>
                     <div id="datos">
+                       
                         <table align="center" cellspacing="10">
                             <td>
                                 <tr align="center">
                                     <p id="cabecera_datos">Datos del usuario:</p> 
                                 </tr>
                             </td>
+                        <?php if(!empty($results['imagen'])): ?>
+                            <td>
+                                <tr align="center">
+                                <img src="/phplogin/imagen/".<?php $results['imagen'] ?>. width="100" height="100"/>
+                                </tr>
+                            </td>
+                            <?php endif; ?>
                             <tr>
                                 <td align="right">
                                     <label id="viñeta_datos">Nombre:</label>
