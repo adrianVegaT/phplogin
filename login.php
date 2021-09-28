@@ -19,7 +19,7 @@
             $_SESSION['user_id'] = $results['id'];
             header("Location: /phplogin/principal.php");
 
-            
+                
         }else {
             $message = "Usuario o contraseña incorrectos";
            

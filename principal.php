@@ -20,9 +20,9 @@
          
       }
 
-     
-    }
     
+    }
+   
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@
                         <?php if(!empty($results['imagen'])): ?>
                             <td>
                                 <tr align="center">
-                                <img src="/phplogin/imagen/".<?php $results['imagen'] ?>. width="100" height="100"/>
+                                <img src="/phplogin/imagen/<?php echo $results['imagen']?>" width="100" height="100"/>
                                 </tr>
                             </td>
                             <?php endif; ?>
